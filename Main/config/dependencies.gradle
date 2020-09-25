@@ -1,0 +1,10 @@
+
+subprojects {
+    dependencies {
+        boolean isMain = project.projectDir.absolutePath.contains("${File.separator}Main${File.separator}")
+        // TODO 默认不是 Main 目录的模块，都依赖于基础框架
+        if (!isMain) {
+            implementation project(path: ':MVVMArchitecture')
+        }
+    }
+}

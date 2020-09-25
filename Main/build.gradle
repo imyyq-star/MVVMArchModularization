@@ -1,3 +1,6 @@
+apply from: 'config/global.gradle'
+apply from: 'config/dependencies.gradle'
+
 buildscript {
 // 注意：以下文件的声明顺序不能乱
     apply from: 'mvvm-config.gradle'

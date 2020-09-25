@@ -1,3 +1,5 @@
 include ':module1_lib'
 include ':app'
+include 'MVVMArchitecture'
+project(':MVVMArchitecture').projectDir = file('../Main/MVVMArchitecture')
 rootProject.name = "Module1"

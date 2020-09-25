@@ -1,0 +1,48 @@
+subprojects {
+    // TODO 只要是 app 开头的模块，都是可运行的
+    boolean isApp = project.name.startsWith("app")
+    if (isApp) {
+        apply plugin: 'com.android.application'
+    } else {
+        apply plugin: 'com.android.library'
+    }
+    apply plugin: 'kotlin-android'
+    apply plugin: 'kotlin-android-extensions'
+    // Kotlin 需要增加 kapt plugin 才可以使用 DataBinding
+    apply plugin: 'kotlin-kapt'
+
+    android {
+        compileSdkVersion SysConfig.compileSdkVersion
+        buildToolsVersion "30.0.2"
+
+        defaultConfig {
+            minSdkVersion SysConfig.minSdkVersion
+            targetSdkVersion SysConfig.targetSdkVersion
+            versionCode 10000
+            versionName "1.0.0"
+        }
+
+        // Gradle Plugin 4.0 及以上
+        buildFeatures {
+            dataBinding = true
+            viewBinding = true
+        }
+
+        // 开启 Java 8 支持
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+
+        kotlinOptions {
+            jvmTarget = "${JavaVersion.VERSION_1_8}"
+        }
+
+        buildTypes {
+            release {
+                minifyEnabled true
+                proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            }
+        }
+    }
+}

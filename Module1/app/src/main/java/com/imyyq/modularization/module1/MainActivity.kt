@@ -1,11 +1,9 @@
 package com.imyyq.modularization.module1
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import com.imyyq.modularization.module1.databinding.ActivityMainBinding
+import com.imyyq.mvvm.base.DataBindingBaseActivity
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
+class MainActivity : DataBindingBaseActivity<ActivityMainBinding, MainViewModel>(
+    R.layout.activity_main, BR.viewModel
+) {
 }

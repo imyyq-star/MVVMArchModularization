@@ -1,24 +1,23 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-buildscript {
-    ext.kotlin_version = "1.3.72"
-    repositories {
-        google()
-        jcenter()
-    }
-    dependencies {
-        classpath "com.android.tools.build:gradle:4.0.1"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+apply from: '../Main/config/global.gradle'
+apply from: '../Main/config/dependencies.gradle'
 
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+buildscript {
+// 注意：以下文件的声明顺序不能乱
+    apply from: 'mvvm-config.gradle'
+    apply from: '../Main/MVVMArchitecture/config.gradle'
+    apply from: '../Main/MVVMArchitecture/dependencies.gradle'
+
+    addRepository(repositories)
+
+    dependencies {
+        // 根据 AS 的版本而不同
+        classpath "com.android.tools.build:gradle:4.0.1"
+        classpath Deps.kotlinPlugin
     }
 }
 
 allprojects {
-    repositories {
-        google()
-        jcenter()
-    }
+    addRepository(repositories)
 }
 
 task clean(type: Delete) {
