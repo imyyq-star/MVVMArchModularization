@@ -1,0 +1,3 @@
+[submodule "Main/MVVMArchitecture"]
+	path = Main/MVVMArchitecture
+	url = git@github.com:imyyq-star/MVVMArchitecture.git
