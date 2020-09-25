@@ -1,2 +1,3 @@
+include ':module1_lib'
 include ':app'
 rootProject.name = "Module1"
