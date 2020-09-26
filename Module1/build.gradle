@@ -2,8 +2,8 @@ apply from: '../Main/config/global.gradle'
 apply from: '../Main/config/dependencies.gradle'
 
 buildscript {
-// 注意：以下文件的声明顺序不能乱
-    apply from: 'mvvm-config.gradle'
+    // 注意：以下文件的声明顺序不能乱
+    apply from: '../Main/mvvm-config.gradle'
     apply from: '../Main/MVVMArchitecture/config.gradle'
     apply from: '../Main/MVVMArchitecture/dependencies.gradle'
 

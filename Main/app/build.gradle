@@ -6,4 +6,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation project(path: ':MVVMArchitecture')
+    implementation project(path: ':module1_lib')
 }
