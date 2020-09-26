@@ -29,12 +29,20 @@
             app:layout_constraintTop_toTopOf="parent"
             />
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_module1"
+            android:name="com.imyyq.modularization.module1_lib.Module1LibFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:name="com.imyyq.modularization.module1_lib.Module1LibFragment"
+            />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_module2"
+            android:name="com.imyyq.modularization.module2_lib.Module2LibFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             />
 
     </LinearLayout>
