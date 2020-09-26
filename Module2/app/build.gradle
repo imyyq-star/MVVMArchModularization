@@ -1,0 +1,10 @@
+android {
+    defaultConfig {
+        applicationId "com.imyyq.modularization.module2"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation project(path: ':module2_lib')
+}

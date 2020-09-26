@@ -1,0 +1,7 @@
+android {
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    // 如果模块有特殊的配置，自行配置
+}
