@@ -1,5 +1,6 @@
 include ':module1_lib'
 include ':app'
+// 如果当前项目想要引用其他目录的模块，必须手动声明
 include 'MVVMArchitecture'
 project(':MVVMArchitecture').projectDir = file('../Main/MVVMArchitecture')
 rootProject.name = "Module1"

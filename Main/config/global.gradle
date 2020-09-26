@@ -15,11 +15,25 @@ subprojects {
         compileSdkVersion SysConfig.compileSdkVersion
         buildToolsVersion "30.0.2"
 
+        // 所有 library 类型的模块，资源命名必须以模块名小写加下划线为前缀，以免和其他模块冲突
+        if (!isApp) {
+            resourcePrefix name.toLowerCase() + '_'
+        }
+
         defaultConfig {
             minSdkVersion SysConfig.minSdkVersion
             targetSdkVersion SysConfig.targetSdkVersion
             versionCode 10000
             versionName "1.0.0"
+
+            // ARouter 配置
+            javaCompileOptions {
+                annotationProcessorOptions {
+                    arguments = [AROUTER_MODULE_NAME: project.getName()]
+                }
+            }
+
+            multiDexEnabled true
         }
 
         // Gradle Plugin 4.0 及以上
@@ -32,17 +46,82 @@ subprojects {
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_8
             targetCompatibility JavaVersion.VERSION_1_8
+
+            /**
+             * Java源文件编码。
+             */
+            encoding "UTF-8"
+
+            incremental true
         }
 
         kotlinOptions {
             jvmTarget = "${JavaVersion.VERSION_1_8}"
         }
 
+        if (isApp) {
+            signingConfigs {
+                mySigning {
+                    keyAlias "modularization"
+                    keyPassword "modularization"
+
+                    storeFile file("../../modularization.jks")
+                    storePassword "modularization"
+
+                    v1SigningEnabled true
+                    v2SigningEnabled true
+                }
+            }
+        }
+
         buildTypes {
             release {
                 minifyEnabled true
+                // 只有 application 类型的，才需要缩减资源
+                if (isApp) {
+                    shrinkResources true
+                    signingConfig signingConfigs.mySigning
+                }
                 proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             }
+
+            debug {
+                ext.enableCrashlytics = false
+                ext.alwaysUpdateBuildId = false
+                if (isApp) {
+                    signingConfig signingConfigs.mySigning
+                }
+            }
+        }
+
+        aaptOptions {
+            /**
+             * 获得要使用的处理程序的数量。更多的处理程序进程将更快速地处理文件，但将需要更多的内存和CPU。
+             */
+            cruncherProcesses 10
+
+            /**
+             * 如果找不到配置条目，则强制aapt返回错误。
+             * aapt --help
+             */
+            failOnMissingConfigEntry true
+        }
+
+        dexOptions {
+            /**
+             * 可用于dex的最大并发进程数。默认为4。
+             *
+             * 请注意，并发进程数乘以内存需求代表了dx进程将使用的最小内存量：
+             * Total Memory = maxProcessCount * javaMaxHeapSize
+             *
+             * 为避免抖动，请保持这两个设置适合您的配置。
+             */
+            maxProcessCount 6
+
+            // 是否预索引库。这可以改善增量构建，但是干净的构建可能会更慢。
+            preDexLibraries true
+            // 运行dx时要使用的线程数。默认为4
+            threadCount 8
         }
     }
 }
