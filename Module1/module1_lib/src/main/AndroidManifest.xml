@@ -2,4 +2,7 @@
     package="com.imyyq.modularization.module1_lib"
     >
 
+    <application>
+        <activity android:name=".Module1LibActivity" />
+    </application>
 </manifest>

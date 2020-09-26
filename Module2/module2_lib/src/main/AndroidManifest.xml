@@ -1,4 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.imyyq.modularization.module2_lib">
 
+    <application>
+        <activity android:name=".Module2LibActivity" />
+    </application>
+
 </manifest>

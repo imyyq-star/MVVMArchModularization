@@ -11,6 +11,12 @@ subprojects {
     // Kotlin 需要增加 kapt plugin 才可以使用 DataBinding
     apply plugin: 'kotlin-kapt'
 
+    kapt {
+        arguments {
+            arg("AROUTER_MODULE_NAME", project.getName())
+        }
+    }
+
     android {
         compileSdkVersion SysConfig.compileSdkVersion
         buildToolsVersion "30.0.2"
@@ -122,6 +128,12 @@ subprojects {
             preDexLibraries true
             // 运行dx时要使用的线程数。默认为4
             threadCount 8
+        }
+
+        repositories {
+            flatDir {
+                dirs 'libs'
+            }
         }
     }
 }

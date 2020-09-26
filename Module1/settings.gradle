@@ -3,4 +3,6 @@ include ':app'
 // 如果当前项目想要引用其他目录的模块，必须手动声明
 include 'MVVMArchitecture'
 project(':MVVMArchitecture').projectDir = file('../Main/MVVMArchitecture')
+include 'arouter'
+project(':arouter').projectDir = file('../Main/arouter')
 rootProject.name = "Module1"
