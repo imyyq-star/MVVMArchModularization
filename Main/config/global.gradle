@@ -1,3 +1,11 @@
+allprojects {
+    addRepository(repositories)
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
 subprojects {
     // TODO 只要是 app 开头的模块，都是可运行的
     boolean isApp = project.name.startsWith("app")
@@ -83,6 +91,7 @@ subprojects {
         buildTypes {
             release {
                 minifyEnabled true
+                zipAlignEnabled true
                 // 只有 application 类型的，才需要缩减资源
                 if (isApp) {
                     shrinkResources true
@@ -94,6 +103,7 @@ subprojects {
             debug {
                 ext.enableCrashlytics = false
                 ext.alwaysUpdateBuildId = false
+                crunchPngs = false
                 if (isApp) {
                     signingConfig signingConfigs.mySigning
                 }

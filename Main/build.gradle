@@ -15,11 +15,3 @@ buildscript {
         classpath Deps.kotlinPlugin
     }
 }
-
-allprojects {
-    addRepository(repositories)
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
-}
