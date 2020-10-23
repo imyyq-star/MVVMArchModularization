@@ -17,4 +17,9 @@ git submodule init
 git submodule update
 ```
 
-代码就完整了，每个目录都是一个独立的工程。
+这样代码就完整了，根目录下的每个目录，比如 Main，Module1 等都是一个个独立的工程。
+
+# 文章
+[一种更好的组件化方式](https://juejin.im/post/6886635469464698887/)
+
+# 交流 QQ 群 828441270
